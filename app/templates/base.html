@@ -4,6 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TinkerBuy E-Commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>        body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0
+        }
+    body{font-family:Arial,'Times New Roman';
+    line-height:1.6;
+    color:black;
+    background-color:floralwhite;
+    header,nav,main,footer
+        {
+            text-align: center;
+            padding: 20px;
+        }
+        header {
+            background: #b9fffb;
+            color: black;
+        }
+        nav {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav ul{
+            list-style:none;
+            display:flex;
+            justify-content: center;
+        }
+        nav ul li{
+            padding:10px 20px;
+        }
+        nav ul li a{
+            margin:20px 0;
+        }
+        main{margin:20px 0;
+        }
+        footer{
+            background-color:#333;
+            color: #fff;
+            position:absolute;
+            bottom:0;
+            width: 100%;
+            padding:10px 0;
+        }
+        .product-container{
+            display:flex;
+            justify-content:space-around;
+            flex-wrap:wrap;
+        }
+        .product-container>div{
+            width:200px;
+            margin:10px;
+            padding:10px;
+            background:#fff;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        }
+        .image-container{
+            position:relative;
+            width:300px;
+        }
+        .product-image{
+            width: 100%;
+            height:auto;
+            display:block;
+        }
+        .image-caption{
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            background-color:rgba(0,0,0,0.5);
+            color:white;
+            padding:10px;
+            box-sizing:border-box;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -11,18 +86,42 @@
         <p>Your one-stop shop for all things amazing!</p>
     </header>
 
+
+
+
+
+
+    <!--still can't figure out the navigation from one page to another. That said this section"<i class="fa fa-home"></i>" is what allows for the little image icon next to the word home -->
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+            <li><a href="#"><i class="fa fa-shopping-cart"></i>Products</a></li>
+            <li><a href="#"><i class="fa fa-phone-alt"></i>Contact</a></li>
         </ul>
     </nav>
+
+
+
+
+
+
 
     <main>
         <section>
             <h2>Featured Products</h2>
             <div class="product-container">
+                <div class="image-container">
+                    <img src="ComputerChip.jpg" alt="Motherboard" class="product-image" />
+                    <p class="image-caption">Motherboard</p>
+                </div>
+                <div class="image-container">
+                    <img src="ComputerChip2.jpg" alt="ComputerChip" class="product-image" />
+                    <p class="image-caption">3 Computer Chips</p>
+                </div>
+                <div class="image-container">
+                    <img src="KeyboardMouseHeadphones.jpg" alt="Computer accessories" class="product-image" />
+                    <p class="image-caption">Computer Accessories</p>
+                </div>
             </div>
         </section>
     </main>
