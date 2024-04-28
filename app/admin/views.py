@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect
 from . import admin_blueprint
 
-@admin_blueprint.route('/admin/')
+@admin_blueprint.route('/')
 def admin_page():
-    return render_template("dashboard.html")
+    return render_template("/dashboard.html")
