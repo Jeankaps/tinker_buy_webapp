@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+   <header>
+        <h1>Welcome to TinkerBuy</h1>
+        <p>Your one-stop shop for all things amazing!</p>
+    </header>
+   <nav>
+        <ul>
+            <li><button onclick="location.href='base.html'"><i class="fa fa-home"></i>Home</button></li>
+            <li><button onclick="location.href='../auth/templates/auth/login.html'"><i class="fa fa-shopping-cart"></i>Products</button></li>
+            <li><button onclick="location.href='../admin/templates/admin/product_management.html'"><i class="fa fa-key"></i>Admin</button></li>
+            <li><a href="#"><i class="fa fa-phone-alt"></i>Contact</a></li>
+        </ul>
+    </nav>
+
+       <div>
+        <section>
+            <h2>Featured Products</h2>
+            <div class="product-container">
+                <div class="image-container">
+                    <img src="ComputerChip.jpg" alt="Motherboard" class="product-image" />
+                    <p class="image-caption">Motherboard</p>
+                </div>
+                <div class="image-container">
+                    <img src="ComputerChip2.jpg" alt="ComputerChip" class="product-image" />
+                    <p class="image-caption">3 Computer Chips</p>
+                </div>
+                <div class="image-container">
+                    <img src="KeyboardMouseHeadphones.jpg" alt="Computer accessories" class="product-image" />
+                    <p class="image-caption">Computer Accessories</p>
+                </div>
+            </div>
+        </section>
+        </div>
+
+{% endblock %}

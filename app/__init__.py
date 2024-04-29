@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint
 from flask import render_template, url_for, request, make_response, session 
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from config import app_config
 from app.models import init_db
 
@@ -12,6 +13,20 @@ app.config.from_object('config.app_config')
 
 # Initialize db and return list of class tables
 tables = init_db(app)
+
+# Login manager
+login_manager = LoginManager()
+login_manager.login_view = 'auth_blueprint.login'
+login_manager.init_app(app)
+
+from .models import User 
+
+@login_manager.user_loader
+def load_user(User_ID):
+    # the user_id is just the PK of our user
+    return User.query.get(int(User_ID))
+
+
 
 # Import blueprints
 from app.admin import admin_blueprint 

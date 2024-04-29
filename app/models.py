@@ -49,11 +49,14 @@ class User(UserMixin, db.Model):
     __tablename__ = 'User'  # Set the tablename
 
     # Define the columns of the User table
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(45), unique=True)
-    password = db.Column(db.String(260))
-    user_type = db.Column(db.String(20))
-    registration_date = db.Column(db.DateTime)  
-    last_login = db.Column(db.DateTime)         
-    user_status = db.Column(db.String(45))
+    User_ID = db.Column(db.Integer, primary_key=True)
+    Username = db.Column(db.String(45), unique=True)
+    Password_hash = db.Column(db.String(260))
+    UserType = db.Column(db.String(20))
+    RegistrationDate = db.Column(db.DateTime)  
+    LastLogin = db.Column(db.DateTime)         
+    UserStatus = db.Column(db.String(45))
+
+    def get_id(self):
+        return str(self.User_ID) # convert ID to string if it is not already a string
 

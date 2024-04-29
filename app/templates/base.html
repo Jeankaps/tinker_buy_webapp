@@ -5,126 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TinkerBuy E-Commerce</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <style>        body, h1, h2, p, ul, li {
-            margin: 0;
-            padding: 0
-        }
-    body{font-family:Arial,'Times New Roman';
-    line-height:1.6;
-    color:black;
-    background-color:floralwhite;
-    header,nav,main,footer
-        {
-            text-align: center;
-            padding: 20px;
-        }
-        header {
-            background: #b9fffb;
-            color: black;
-        }
-        nav {
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        nav ul{
-            list-style:none;
-            display:flex;
-            justify-content: center;
-        }
-        nav ul li{
-            padding:10px 20px;
-        }
-        nav ul li a{
-            margin:20px 0;
-        }
-        main{margin:20px 0;
-        }
-        footer{
-            background-color:#333;
-            color: #fff;
-            position:absolute;
-            bottom:0;
-            width: 100%;
-            padding:10px 0;
-        }
-        .product-container{
-            display:flex;
-            justify-content:space-around;
-            flex-wrap:wrap;
-        }
-        .product-container>div{
-            width:200px;
-            margin:10px;
-            padding:10px;
-            background:#fff;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-        }
-        .image-container{
-            position:relative;
-            width:300px;
-        }
-        .product-image{
-            width: 100%;
-            height:auto;
-            display:block;
-        }
-        .image-caption{
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            background-color:rgba(0,0,0,0.5);
-            color:white;
-            padding:10px;
-            box-sizing:border-box;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')  }}">
+    <link rel="stylesheet" href="">
 </head>
 <body>
-    <header>
-        <h1>Welcome to TinkerBuy</h1>
-        <p>Your one-stop shop for all things amazing!</p>
-    </header>
+    <section class="hero is-primary is-fullheight">
 
-
-
-
-
-
-    <nav>
-        <ul>
-            <li><button onclick="location.href='base.html'"><i class="fa fa-home"></i>Home</button></li>
-            <li><button onclick="location.href='../auth/templates/auth/login.html'"><i class="fa fa-shopping-cart"></i>Products</button></li>
-            <li><button onclick="location.href='../admin/templates/admin/product_management.html'"><i class="fa fa-key"></i>Admin</button></li>
-            <li><a href="#"><i class="fa fa-phone-alt"></i>Contact</a></li>
-        </ul>
-    </nav>
-
-
-
-
-
-
-
-    <main>
-        <section>
-            <h2>Featured Products</h2>
-            <div class="product-container">
-                <div class="image-container">
-                    <img src="ComputerChip.jpg" alt="Motherboard" class="product-image" />
-                    <p class="image-caption">Motherboard</p>
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('general_blueprint.index') }}" class="navbar-item fa fa-home">
+                                Home
+                            </a>
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('general_blueprint.index') }}" class="navbar-item fa">
+                                Profile
+                            </a>
+                            {% endif %}
+                            {% if not current_user.is_authenticated %}
+                            <a href="{{ url_for('auth_blueprint.login') }}" class="navbar-item fa">
+                                Login
+                            </a>
+                            <a href="{{ url_for('auth_blueprint.signup') }}" class="navbar-item fa">
+                                Sign Up
+                            </a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('auth_blueprint.logout') }}" class="navbar-item fa">
+                                Logout
+                            </a>
+                            <a href="{{ url_for('cart_blueprint.cart') }}" class="navbar-item fa fa-shopping-cart">
+                                Cart
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-                <div class="image-container">
-                    <img src="ComputerChip2.jpg" alt="ComputerChip" class="product-image" />
-                    <p class="image-caption">3 Computer Chips</p>
-                </div>
-                <div class="image-container">
-                    <img src="KeyboardMouseHeadphones.jpg" alt="Computer accessories" class="product-image" />
-                    <p class="image-caption">Computer Accessories</p>
-                </div>
+            </nav>
+        </div>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                {% block content %}
+                {% endblock %}
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <footer>
         <p>© 2024 TinkerBuy. All rights reserved.</p>
