@@ -1,36 +1,127 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinkerBuy E-Commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0
+        }
 
-{% block content %}
-<div class="column is-4 is-offset-4">
-    <h3 class="title">Login</h3>
-    <div class="box">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="notification is-danger">
-                    {{ messages[0] }}
-                </div>
-            {% endif %}
-            {% endwith %}
-        <form method="POST" action="/login">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
-                </div>
-            </div>
+        body {
+            font-family: Arial,'Times New Roman';
+            line-height: 1.6;
+            color: black;
+            background-color: floralwhite;
+        }
+        header,nav,main,footer
 
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
-                </div>
-            </div>
-            <div class="field">
-                <label class="checkbox">
-                    <input type="checkbox" name="remember">
-                    Remember me
-                </label>
-            </div>
-            <button class="button is-block is-info is-large is-fullwidth">Login</button>
-        </form>
-    </div>
-</div>
-{% endblock %}
+        {
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            background: #b9fffb;
+            color: black;
+        }
+
+        nav {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+            nav ul {
+                list-style: none;
+                display: flex;
+                justify-content: center;
+            }
+
+                nav ul li {
+                    padding: 10px 20px;
+                }
+
+                    nav ul li a {
+                        margin: 20px 0;
+                    }
+
+        main {
+            margin: 20px 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+            .product-container > div {
+                width: 200px;
+                margin: 10px;
+                padding: 10px;
+                background: #fff;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+
+        .image-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to TinkerBuy: Login</h1>
+        <p>Your one-stop shop for all things amazing!</p>
+    </header>
+    <nav>
+        <ul>
+            <li><button onclick="location.href='../../../templates/base.html'"><i class="fa fa-home"></i>Home</button></li>
+            <li><button onclick="location.href='login.html'"><i class="fa fa-shopping-cart"></i>Products</button></li>
+
+            <li><button onclick="location.href='../../../admin/templates/admin/product_management.html'"><i class="fa fa-key"></i>Admin</button></li>
+            <li><a href="#"><i class="fa fa-phone-alt"></i>Contact</a></li>
+        </ul>
+    </nav>
+
+    <form action="/login" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+    <p id="loginMessage"></p> <!-- Placeholder for any error message -->
+</body>
+</html>

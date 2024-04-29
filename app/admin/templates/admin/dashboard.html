@@ -1,9 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Admin page</title>
-    </head>
-    <body>
-        <h1>ADMIN TEST PAGE</h1>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinkerBuy E-Commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: Arial,'Times New Roman';
+            line-height: 1.6;
+            color: black;
+            background-color: floralwhite;
+            header,nav,main,footer
+
+        {
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            background: #b9fffb;
+            color: black;
+        }
+
+        nav {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+            nav ul {
+                list-style: none;
+                display: flex;
+                justify-content: center;
+            }
+
+                nav ul li {
+                    padding: 10px 20px;
+                }
+
+                    nav ul li a {
+                        margin: 20px 0;
+                    }
+
+        main {
+            margin: 20px 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+            .product-container > div {
+                width: 200px;
+                margin: 10px;
+                padding: 10px;
+                background: #fff;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+
+        .image-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to TinkerBuy: Admin</h1>
+        <p>Your one-stop shop for all things amazing!</p>
+    </header>
+    <nav>
+        <ul>
+            <li><button onclick="location.href='../../../templates/base.html'"><i class="fa fa-home"></i>Home</button></li>
+            <li><button onclick="location.href='../../../auth/templates/auth/login.html'"><i class="fa fa-shopping-cart"></i>Products</button></li>
+
+            <li><button onclick="location.href='product_management.html'"><i class="fa fa-key"></i>Logout</button></li>
+            <li><a href="#"><i class="fa fa-phone-alt"></i>Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Admin Functions</h2>
+
+        <button onclick="deleteCustomer()">Delete Customer Account</button>
+
+        <button onclick="runSalesReport()">Export Sales Report</button>
+
+        <div id="adminMessages"></div> 
+    </main>
+    <script>
+        function deleteCustomer() {
+            const customerId = prompt('Enter the customer ID to delete:');
+            if (!customerId) return;
+
+            fetch(`/admin/delete_customer/${customerId}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const message = document.getElementById('adminMessages');
+                    message.innerHTML = data.message;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function runSalesReport() {
+            fetch('/admin/sales_report')
+                .then(response => response.blob()) 
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'sales_report.csv';
+                    document.body.appendChild(a);
+                    a.click(); // Trigger download
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+    <footer>
+        <p>&copy; 2024 TinkerBuy. All rights reserved.</p>
+    </footer>
+</body>
 </html>
