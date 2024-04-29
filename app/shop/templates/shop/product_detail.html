@@ -110,7 +110,7 @@
             <li><a href="#"><i class="fa fa-phone-alt"></i>Contact</a></li>
         </ul>
     </nav>
-
+    <input type="text" id="searchBox" placeholder="Search Products" oninput="filterProducts()" />
     <main>
 
 
@@ -164,6 +164,19 @@
 
         <!--leave this section uncommented-->
         <script>
+            function displayProducts(products) {
+                const productList = document.getElementById('productList');
+                productList.innerHTML = ''; 
+
+                products.forEach(product => {
+                    productList.innerHTML += `<div class="product">
+                    <h3>${product.name}</h3>
+                    <p>$${product.price}</p>
+                    <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+                </div>`;
+                });
+            }
+
             function addToCart(productName, price) {
                 let cart = JSON.parse(localStorage.getItem('cart')) || {};
                 if (cart[productName]) {
@@ -176,6 +189,27 @@
 
             function goToCart() {
                 window.location.href = 'cart.html';
+            }
+
+            function filterProducts() {
+                const searchQuery = document.getElementById('searchBox').value.toLowerCase(); 
+                const products = JSON.parse(localStorage.getItem('products')) || getDummyProducts(); 
+
+                const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery)); 
+
+                displayProducts(filteredProducts); 
+            }
+            document.addEventListener('DOMContentLoaded', () => {
+                const products = getDummyProducts(); 
+                localStorage.setItem('products', JSON.stringify(products)); 
+                displayProducts(products); 
+            });
+            function getDummyProducts() {
+                return [
+                    { name: 'Product 1', price: 10 },
+                    { name: 'Product 2', price: 20 },
+                    { name: 'Product 3', price: 30 },
+                ]
             }
         </script>
     </main>
